@@ -238,12 +238,11 @@
                                     {{ $featured->title }}
                                 </h2>
                                 
-                                @if($featured->description)
-                                    <div class="text-gray-600 text-base mb-6 leading-relaxed prose prose-sm max-w-none">
-                                        {!! $featured->description !!}
-                                    </div>
-                                @endif
-
+                         @if($featured->description)
+    <div class="text-gray-600 text-base mb-6 leading-relaxed prose prose-sm max-w-none">
+        {!! nl2br(e($featured->description)) !!}
+    </div>
+@endif
                                 @if($featured->link && $featured->button_text)
                                     <div class="pt-6 border-t border-gray-100">
                                         <a href="{{ $featured->link }}" 
@@ -292,11 +291,11 @@
                                     {{ $featured->title }}
                                 </h2>
                                 
-                                @if($featured->description)
-                                    <div class="text-gray-600 text-base mb-6 leading-relaxed prose prose-sm max-w-none">
-                                        {!! $featured->description !!}
-                                    </div>
-                                @endif
+                     @if($featured->description)
+    <div class="text-gray-600 text-base mb-6 leading-relaxed prose prose-sm max-w-none">
+        {!! nl2br(e($featured->description)) !!}
+    </div>
+@endif
 
                                 @if($featured->link && $featured->button_text)
                                     <div class="pt-6 border-t border-gray-200">
