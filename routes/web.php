@@ -5,6 +5,7 @@ use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\TwoFactor;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use App\Livewire\Admin\Products\Index as ProductsIndex;
@@ -34,6 +35,25 @@ Route::get('/pengumuman', [HomeController::class, 'announcement'])->name('announ
 Route::get('/produk', [HomeController::class, 'products'])->name('guest.products');
 Route::get('/produk/{product:slug}', [HomeController::class, 'productDetail'])->name('guest.products.show');
 
+// Tambahkan route ini
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+// Route test email (hapus setelah testing berhasil)
+Route::get('/test-email', function () {
+    $testMessage = new \App\Models\ContactMessage([
+        'name' => 'Test User',
+        'email' => 'test@example.com',
+        'phone' => '081234567890',
+        'message' => 'Ini adalah pesan test untuk memastikan email notification berfungsi dengan baik.'
+    ]);
+    
+    try {
+        Mail::to('official@nataultima.com')->send(new \App\Mail\ContactMessageNotification($testMessage));
+        return 'Email berhasil dikirim! Cek inbox Anda.';
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
+});
 /*
 |--------------------------------------------------------------------------
 | Authenticated Routes
@@ -86,5 +106,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Announcements Management
     Route::get('/announcements', AnnouncementManager::class)->name('announcements');
+
+
+    //contact massages
+     Route::get('/contact-messages', \App\Livewire\Admin\ContactMessages::class)->name('contact-messages');
 });
 });

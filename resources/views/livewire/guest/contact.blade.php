@@ -131,22 +131,38 @@
             <h3 class="text-2xl font-bold text-white mb-2">Kirim Pesan</h3>
             <p class="text-white/70">Isi formulir, dan tim kami akan segera merespons.</p>
           </header>
-          <form class="space-y-5" action="#" method="post">
+
+          {{-- Alert Success - TAMBAHAN INI --}}
+          @if(session('success'))
+            <div class="mb-5 bg-green-500/20 border border-green-500/30 text-white px-4 py-3 rounded-xl backdrop-blur-sm" role="alert">
+              <div class="flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>{{ session('success') }}</span>
+              </div>
+            </div>
+          @endif
+
+          {{-- UBAH HANYA TAG FORM INI: tambahkan action, method, dan @csrf --}}
+          <form class="space-y-5" action="{{ route('contact.store') }}" method="POST">
+            @csrf
+            
             <div>
               <label class="block text-white/90 font-medium mb-2" for="name">Nama Lengkap</label>
-              <input type="text" id="name" name="name" class="w-full border border-white/20 rounded-xl px-4 py-3 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 focus:outline-none transition-all bg-white/10 text-white placeholder-white/50" placeholder="Nama Anda" required>
+              <input type="text" id="name" name="name" value="{{ old('name') }}" class="w-full border border-white/20 rounded-xl px-4 py-3 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 focus:outline-none transition-all bg-white/10 text-white placeholder-white/50" placeholder="Nama Anda" required>
             </div>
             <div>
               <label class="block text-white/90 font-medium mb-2" for="email">Email <span class="text-red-400">*</span></label>
-              <input type="email" id="email" name="email" class="w-full border border-white/20 rounded-xl px-4 py-3 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 focus:outline-none transition-all bg-white/10 text-white placeholder-white/50" placeholder="example@gmial.com" required>
+              <input type="email" id="email" name="email" value="{{ old('email') }}" class="w-full border border-white/20 rounded-xl px-4 py-3 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 focus:outline-none transition-all bg-white/10 text-white placeholder-white/50" placeholder="example@gmial.com" required>
             </div>
             <div>
               <label class="block text-white/90 font-medium mb-2" for="phone">Nomor Telepon</label>
-              <input type="tel" id="phone" name="phone" class="w-full border border-white/20 rounded-xl px-4 py-3 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 focus:outline-none transition-all bg-white/10 text-white placeholder-white/50" placeholder="+62 812 3456 ***">
+              <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" class="w-full border border-white/20 rounded-xl px-4 py-3 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 focus:outline-none transition-all bg-white/10 text-white placeholder-white/50" placeholder="+62 812 3456 ***">
             </div>
             <div>
               <label class="block text-white/90 font-medium mb-2" for="message">Pesan <span class="text-red-400">*</span></label>
-              <textarea id="message" name="message" rows="4" class="w-full border border-white/20 rounded-xl px-4 py-3 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 focus:outline-none transition-all bg-white/10 text-white placeholder-white/50 resize-none" placeholder="Ceritakan kebutuhan Anda..." required></textarea>
+              <textarea id="message" name="message" rows="4" class="w-full border border-white/20 rounded-xl px-4 py-3 focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 focus:outline-none transition-all bg-white/10 text-white placeholder-white/50 resize-none" placeholder="Ceritakan kebutuhan Anda..." required>{{ old('message') }}</textarea>
             </div>
             <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold py-3.5 rounded-xl hover:from-cyan-600 hover:to-blue-700 transform hover:scale-[1.02] transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-cyan-500/25 flex items-center justify-center group">
               Kirim Pesan

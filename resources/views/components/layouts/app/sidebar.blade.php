@@ -16,13 +16,14 @@
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
-            <flux:navlist.group :heading="__('CMS')" class="grid">
-                    <flux:navlist.item icon="photo" :href="route('admin.portfolio')" :current="request()->routeIs('admin.portfolio*')" wire:navigate>{{ __('Portfolio') }}</flux:navlist.item>
-                    <flux:navlist.item icon="shopping-bag" :href="route('admin.products')" :current="request()->routeIs('admin.products*')" wire:navigate>{{ __('Products') }}</flux:navlist.item>
-                    <flux:navlist.item icon="user-group" :href="route('admin.clients')" :current="request()->routeIs('admin.clients*')" wire:navigate>{{ __('Clients') }}</flux:navlist.item>
-                    <flux:navlist.item icon="user" :href="route('admin.certificates')" :current="request()->routeIs('admin.certificates*')" wire:navigate>{{ __('Certificates') }}</flux:navlist.item>
-                    <flux:navlist.item icon="user" :href="route('admin.announcements')" :current="request()->routeIs('admin.announcements*')" wire:navigate>{{ __('Announcement') }}</flux:navlist.item>
-                </flux:navlist.group>
+          <flux:navlist.group :heading="__('CMS')" class="grid">
+                <flux:navlist.item icon="photo" :href="route('admin.portfolio')" :current="request()->routeIs('admin.portfolio*')" wire:navigate>{{ __('Portfolio') }}</flux:navlist.item>
+                <flux:navlist.item icon="shopping-bag" :href="route('admin.products')" :current="request()->routeIs('admin.products*')" wire:navigate>{{ __('Products') }}</flux:navlist.item>
+                <flux:navlist.item icon="user-group" :href="route('admin.clients')" :current="request()->routeIs('admin.clients*')" wire:navigate>{{ __('Clients') }}</flux:navlist.item>
+                <flux:navlist.item icon="check-circle" :href="route('admin.certificates')" :current="request()->routeIs('admin.certificates*')" wire:navigate>{{ __('Certificates') }}</flux:navlist.item>
+                <flux:navlist.item icon="megaphone" :href="route('admin.announcements')" :current="request()->routeIs('admin.announcements*')" wire:navigate>{{ __('Announcement') }}</flux:navlist.item>
+                <flux:navlist.item icon="envelope" :href="route('admin.contact-messages')" :current="request()->routeIs('admin.contact-messages*')" wire:navigate>{{ __('Contact Messages') }}</flux:navlist.item>
+            </flux:navlist.group>
             <flux:spacer />
 
             <!-- <flux:navlist variant="outline">

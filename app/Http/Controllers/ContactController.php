@@ -1,32 +1,35 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
+use App\Models\ContactMessage;
+use App\Mail\ContactMessageNotification;
 use Illuminate\Http\Request;
-use App\Models\ContactMessage; // <-- IMPOR MODELNYA
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-    // ... method show() ...
-
     public function store(Request $request)
     {
-        // 1. Validasi data
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'phone' => 'nullable|string',
-            'message' => 'required|string|min:10',
+            'email' => 'required|email|max:255',
+            'phone' => 'nullable|string|max:20',
+            'message' => 'required|string',
         ]);
 
-        // 2. Simpan data ke database
-        ContactMessage::create($validated);
+        // Simpan ke database
+        $contactMessage = ContactMessage::create($validated);
 
-        // 3. Kirim email (akan kita bahas di bawah)
-        // ...
+        // Kirim email notification
+        try {
+            Mail::to('natasupport@nataultimaenggal.com')->send(new ContactMessageNotification($contactMessage));
+        } catch (\Exception $e) {
+            // Log error tapi tetap return success ke user
+            \Log::error('Failed to send contact notification email: ' . $e->getMessage());
+        }
 
-        // 4. Redirect kembali dengan pesan sukses
-        return back()->with('success', 'Pesan Anda berhasil dikirim!');
+        // Redirect ke home dengan hash #contact
+        return redirect('/#contact')->with('success', 'Pesan Anda berhasil terkirim! Kami akan segera merespons.');
     }
 }
