@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="PT. Nata Ultima Enggal - Panel Maker Professional dengan pengalaman 7+ tahun" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>PT. Nata Ultima Enggal - Panel Maker Professional</title>
+    <title>PT. Nata Ultima Enggal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
    
